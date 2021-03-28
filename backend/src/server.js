@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
 
 const typeDefs = require('./GraphQL/schema');
@@ -8,10 +9,13 @@ const models = require('./models');
 const server = new ApolloServer({ 
   typeDefs, 
   resolvers, 
-  context: { models } 
+  context: { models },
+  mocks: true
 });
 
 const app = express();
+app.use(express.json());
+app.use(cors());
 server.applyMiddleware({ app });
 
 // models.sequelize.authenticate();
