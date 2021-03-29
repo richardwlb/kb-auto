@@ -22,22 +22,40 @@ const useStyles = makeStyles((theme) => ({
   cardButton: {
     // justifyContent: 'flex-center',
     // display: 'flex',
-    margin: 'auto',
+    position: 'relative',
+    // margin: 'auto',
     width: '100vw',
-    marginLeft: '10px',
+    marginLeft: '100px',
     '@media (min-width: 800px)': {
       width: '100px',
     }
   },
   actionsContainer: {
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    marginLeft: '20px'
   }
 }));
 
-export default function RegisterCard() {
+export interface Register {
+  id: number;
+  title: string;
+  car_brand: string;
+  car_model: string;
+  car_year: number;
+  desc_problem: string;
+  desc_solution: string;
+}
+
+interface RegisterProps {
+  register: Register;
+}
+
+// export default function RegisterCard({ register }) {
+const RegisterCard: React.FC<RegisterProps> = ({ register }) => {
   const classes = useStyles();
   // const theme = useTheme();
 
@@ -45,29 +63,28 @@ export default function RegisterCard() {
     <Card color="secondary" className={classes.root} >
       <CardContent className={classes.cardDetails}>
         <Typography className={classes.textTitle} >
-          Ignição BMW
+          {register.title}
         </Typography >
         <Typography className={classes.textNormal} >
-          Peugeot
+          {register.car_brand}
         </Typography>
         <Typography className={classes.textNormal} >
-          206 - flex
+          {register.car_model}
         </Typography>
         <Typography className={classes.textNormal} >
-          2008
+          {register.car_year}
         </Typography>
       </CardContent>
       <CardContent>
         <Typography className={classes.textNormal} >
-        sAqui texto grande ara sdjiajdia simcaksd sd soa sa
-        Aqui texto grande ara sdjiajdia simcaksd sd soa sa
-        Aqui texto grande ara sdjiajdia simcaksd sd soa 
+          {register.desc_problem} 
+        </Typography>
+        <Typography className={classes.textNormal} >
+          {register.desc_solution} 
         </Typography>
       </CardContent>
-
-      
         <div className={classes.actionsContainer} >
-          <CardActions  >
+          <CardActions >
             <Button 
               className={classes.cardButton}
               size="small"
@@ -78,9 +95,8 @@ export default function RegisterCard() {
             </Button>
           </CardActions>
         </div>
-      
     </Card>
-
-
   );
-}
+};
+
+export default RegisterCard;

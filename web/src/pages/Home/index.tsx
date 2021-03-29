@@ -8,8 +8,7 @@ import {
   createStyles,
   makeStyles,
   IconButton } from '@material-ui/core';
-import { Widgets } from '@material-ui/icons';
-  import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from '@material-ui/icons/Menu';
 import ListRegisters from '../../components/ListRegisters';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,7 +29,10 @@ const useStyles = makeStyles((theme: Theme) =>
     searchButton: {
       // minWidth: '90px',
       margin: '5px',
-      width: '90vw'
+      width: '90vw',
+      '@media (min-width: 800px)': {
+        maxWidth: '250px'
+      }
     }
   }),
 );

@@ -1,14 +1,1 @@
-import RegisterCard from "../RegisterCard";
-
-export default function ListRegisters() {
-  return(
-    <>
-      <RegisterCard />
-      <RegisterCard />
-      <RegisterCard />
-      <RegisterCard />
-      <RegisterCard />
-      <RegisterCard />
-    </>
-  );
-}
+export { default } from './ListRegister';
