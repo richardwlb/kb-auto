@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     kbRegisters: [KbRegister]
     kbRegister(id: ID!): KbRegister
+    someKbRegisters(limit: Int!, offset: Int!): [KbRegister]
   }
   type Mutation {
     createRegister(

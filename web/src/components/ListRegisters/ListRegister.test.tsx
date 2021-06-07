@@ -33,12 +33,10 @@ it("renders list of registers", async () => {
     </MockedProvider>
   );
   // screen.debug();
+  expect(getByText("Loading...")).toBeInTheDocument();
 
-    expect(getByText("Loading...")).toBeInTheDocument();
-
-    const carModel = await findByText("CIVIC");
-    expect(carModel).toBeInTheDocument();
-
+  const carModel = await findByText("CIVIC");
+  expect(carModel).toBeInTheDocument();
 
 });
 

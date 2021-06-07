@@ -10,7 +10,7 @@ const server = new ApolloServer({
   typeDefs, 
   resolvers, 
   context: { models },
-  mocks: true
+  mocks: false
 });
 
 const app = express();

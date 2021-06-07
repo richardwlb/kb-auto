@@ -2,7 +2,8 @@ const db = require('../models');
 
 const resolvers = {
   Query: {
-    kbRegisters: async () => db.KbRegisters.findAll(),
+    kbRegisters: async ( parent, args, { models }) => db.KbRegisters.findAll(),
+    someKbRegisters: async ( parent, { limit, offset }, { models }) => db.KbRegisters.findAll({ limit, offset }),
     kbRegister: async (obj, args, context, info) => 
       await db.KbRegisters.findByPk(args.id)    
   },

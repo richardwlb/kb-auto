@@ -63,6 +63,9 @@ const RegisterCard: React.FC<RegisterProps> = ({ register }) => {
     <Card color="secondary" className={classes.root} >
       <CardContent className={classes.cardDetails}>
         <Typography className={classes.textTitle} >
+          {register.id}
+        </Typography >
+        <Typography className={classes.textTitle} >
           {register.title}
         </Typography >
         <Typography className={classes.textNormal} >

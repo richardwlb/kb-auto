@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Test from './components/Test';
 
 const Routes = () => {
+  
   return(
     <BrowserRouter>
       <Switch >
