@@ -1,9 +1,10 @@
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 
-import { client } from './services';
+import { client } from './services/client';
 
 import Home from './pages/Home';
+import NewRegister from './pages/NewRegister';
 import Test from './components/Test';
 
 const Routes = () => {
@@ -14,6 +15,7 @@ const Routes = () => {
         <ApolloProvider client={client} >
           <Route component={Home} path="/" exact />
           <Route path="/test" exact component={Test} />
+          <Route path="/new" component={NewRegister} />
         </ApolloProvider>
       </Switch>      
     </BrowserRouter>

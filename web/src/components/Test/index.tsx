@@ -1,110 +1,72 @@
-import {
-  Button
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Height } from '@material-ui/icons';
-import { isJSDocReturnTag } from 'typescript';
+import React, { useEffect, useState } from 'react';
 
+export default function Test() {  
+    const [infos, setInfos] = useState([
+        { 'info1': '', 'info2': '', 'info3': '' }
+    ]);
 
-const response = [{
-  "page": 1,
-  "totalPages": 5,
-  "data": [{
-    "title": "Movie 1",
-    "rating": 4.7
-  }, {
-    "title": "Movie 2",
-    "rating": 7.8
-  }]
-}, {
-  "page": 2,
-  "totalPages": 5,
-  "data": [{
-    "title": "Movie 3",
-    "rating": 5.1
-  }, {
-    "title": "Movie 4",
-    "rating": 2.4
-  }]
-}]
+    const vemDoBanco = [
+      { 'info1': '111', 'info2': '', 'info3': 'rrr' },
+      { 'info1': '222', 'info2': '555', 'info3': 'ttt' },
+      { 'info1': '333', 'info2': '3', 'info3': 'yyy' }
+    ];
 
-const moviesRating = response.map((data) => data.data);
-const rating = moviesRating.flat();
+    useEffect(() => {
+      setInfos(vemDoBanco);
+    }, []);
+    
+    function addNewInfoItem() {
+        setInfos([
+            ...infos,
+            { 'info1': '', 'info2': '', 'info3': '' }
+        ]);
+    };
 
-let maxRating = 0;
-let total = 0;
+    function removeInfoItem(index: any) {
+        const itensCopy = Array.from(infos);
+        itensCopy.splice(index, 1);
+        setInfos(itensCopy);
+    };
 
-for(let i=0; i<rating.length; i++) {
-  const currentRating = rating[i].rating;
-  total += currentRating
-  maxRating = currentRating > maxRating ? currentRating : maxRating;
-}
-
-const average = total/rating.length;
-
-console.log('average: ', average);
-console.log('maxRating: ', maxRating);
-
-
-
-
-const useStyles = makeStyles((theme) => ({
-  redBox: {
-    width: '640px',
-    height: '732px',
-    background: 'red',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  blueBox: {
-    width: '200px',
-    height: '200px',
-    background: 'blue',
+    function updateInfosItem(position:number, field:string, item:string) {
+    const updatedInfoItems = infos.map((standardItem, index) => {
+        if (index === position) {
+            return { ...standardItem, [field]: item }
+        }
+        return standardItem
+    })
+    setInfos(updatedInfoItems)
   }
 
-  // section: {
-  //   borderStyle: 'solid',
-  //   borderColor: '#263238',
-
-  //   height: '80vh',
-  //   width: '60vw',
-  //   padding: '10px',
-  //   display: 'flex',
-  //   margin: 'auto',
-  //   flexDirection: 'column',
-  //   justifyContent: 'flex-end',
-  //   alignItems: 'flex-end'
-  // },
-  // button: {
-  //   // position: 'relative',
-  //   // left: '10px',
-  //   // margin: '10px'
-  // }
-}));
-
-export default function Test() {
-  const classes = useStyles();
-
-  return(
-    // <section className={classes.section}>
-    //   <Button 
-    //     size="small"
-    //     className={classes.button}
-    //     // color="primary"
-    //   >
-    //     Botão
-    //   </Button>
-    //   <Button 
-    //     className={classes.button}
-    //     variant="contained"
-    //     color="primary"
-    //   >
-    //     Botão
-    //   </Button>
-    // </section>
-    <div className={classes.redBox}>
-      <div className={classes.blueBox} ></div>
+  return (
+    <div>
+        {infos.map((item, index) => {
+            return (
+                <div key={index}>
+                    <button onClick={e => removeInfoItem(index)}> Remover </button>
+                    <input
+                        required
+                        type="text"
+                        value={item.info1}
+                        onChange={e => updateInfosItem(index, 'info1', e.target.value)}
+                    />
+                    <input
+                        required
+                        type="text"
+                        value={item.info2}
+                        onChange={e => updateInfosItem(index, 'info2', e.target.value)}
+                    />
+                    <input
+                        required
+                        type="text"
+                        value={item.info3}
+                        onChange={e => updateInfosItem(index, 'info3', e.target.value)}
+                    />
+                </div>
+            );
+        })}
+        <pre> {JSON.stringify(infos, null, 4)} </pre>
+        <button onClick={addNewInfoItem}> Adicionar </button> 
     </div>
-  )
+  );
 }

@@ -56,8 +56,6 @@ const BootsrapInput = withStyles((theme: Theme) =>
 export default function Home(){
   const classes = useStyles();
 
-  console.log('bbbb');
-
   return(
     <div >
      <AppBar position="static"> 
