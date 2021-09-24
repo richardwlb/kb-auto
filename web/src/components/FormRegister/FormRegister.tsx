@@ -1,29 +1,37 @@
-import { TextField, Button, InputLabel, Select, MenuItem } from '@material-ui/core';
-import { useState } from 'react';
+import { TextField, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { useEffect, useState } from 'react';
 
+import { Register } from '../../types';
 import useStyles from './FormRegisters.styles';
 
 interface FormRegisterProps {
-  action: Function;
+  register?: Register;
 }
 
 const FormRegister: React.FC<FormRegisterProps> = ( props ) => {
   const [title, setTitle] = useState<String>('');
   const [brand, setBrand] = useState<any>('');
   const [model, setModel] = useState<any>('');
-  const [year, setYear] = useState<any>();
+  const [year, setYear] = useState<any>('');
   const [problem, setProblem] = useState<String>('');
   const [solution, setSolution] = useState<String>('');
 
-  
-
   const classes = useStyles();
+
+  useEffect(() => {
+    if(props.register) {
+      setTitle(props.register?.title);
+      setBrand(props.register?.car_brand);
+      setModel(props.register?.car_model);
+      setYear(props.register?.car_year);
+      setProblem(props.register?.desc_problem);
+      setSolution(props.register?.desc_solution);
+    }
+  }, [props.register]);
 
   return (
     <div>
-      <h3>form</h3>
       <div className={classes.formWrapper}>
-        {/* <form className={classes.formWrapper} onSubmit={props.action}> */}
           <TextField 
             style={{ marginBottom:'2rem' }}
             fullWidth 
@@ -98,10 +106,6 @@ const FormRegister: React.FC<FormRegisterProps> = ( props ) => {
             value={solution}
             onChange={ e => setSolution(e.target.value)}
           />
-
-          {/* <Button type='submit' >Enviar</Button> */}
-        {/* </form> */}
-        
       </div>
     </div>
     )

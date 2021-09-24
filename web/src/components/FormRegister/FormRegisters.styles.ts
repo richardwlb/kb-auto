@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: '1.5rem',
       display: 'flex',
       flexDirection: 'column',
+      background: 'white'
     }
   })
 );
