@@ -16,7 +16,7 @@ const typeDefs = gql`
       desc_solution: String!,
     ): KbRegister
     deleteRegister(
-      id:Int!
+      id:ID!
     ):String
     updateRegister(
       id: ID!,
