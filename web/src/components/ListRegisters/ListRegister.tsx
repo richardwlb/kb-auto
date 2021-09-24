@@ -13,6 +13,7 @@ export default function ListRegisters() {
     onCompleted: (res) => {
       console.log('Result:',res)
     },
+    fetchPolicy: 'no-cache'
     // variables: {
     //   offset: 0,
     //   limit: 2
