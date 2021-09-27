@@ -1,5 +1,4 @@
-import { 
-  Button, 
+import {  
   InputBase, 
   AppBar, 
   Toolbar, 
@@ -9,30 +8,32 @@ import {
   makeStyles,
   IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import { SearchSharp, NoteAddSharp } from '@material-ui/icons';
 import ListRegisters from '../../components/ListRegisters';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     containerField: {
-      // borderStyle: 'solid',
-      // borderColor: 'black',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
       alignItems: 'center',
-      // flexWrap: 'nowrap',
       padding: '10px',
       '@media (min-width: 800px)': {
         flexDirection: 'row',
       }
     },
-    searchButton: {
-      // minWidth: '90px',
-      margin: '5px',
-      width: '90vw',
-      '@media (min-width: 800px)': {
-        maxWidth: '250px'
-      }
+    searchIcon: {
+      cursor: 'pointer',
+      marginLeft: '0.5rem',
+    },
+    createLink: {
+      color: theme.palette.common.white,
+    },
+    searchContainer: {
+      display: 'flex',
+      alignItems: 'center',
     }
   }),
 );
@@ -57,22 +58,30 @@ export default function Home(){
   const classes = useStyles();
 
   return(
-    <div >
+    <div>
      <AppBar position="static"> 
        <Toolbar className={classes.containerField}>
          <IconButton 
           edge="start" 
-          // className={classes.menuButton} 
           color="inherit" 
           aria-label="menu">
           <MenuIcon />
         </IconButton>
-        <BootsrapInput />
-        <Button 
-          className={classes.searchButton}
-          variant="contained" >
-          Pesquisar
-        </Button>
+
+        <div className={classes.searchContainer} >
+          <BootsrapInput />
+          <SearchSharp 
+            className={classes.searchIcon}
+            onClick={() => alert('procurar')} 
+          />
+        </div>
+
+        <div className="classes actionsContainer">
+          <Link className={classes.createLink} to="/new">
+            <NoteAddSharp/>
+          </Link>
+        </div>
+          
        </Toolbar>
       </AppBar>
       <ListRegisters />
