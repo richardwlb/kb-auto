@@ -1,12 +1,13 @@
 import { Button } from '@material-ui/core';
 import { useMutation, useQuery } from '@apollo/client';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 
 import FormRegister from "../../components/FormRegister";
 import useStyles from './EditRegister.styles';
 import { GET_REGISTER } from '../../services/queries';
 import { DELETE_REGISTER, UPDATE_REGISTER } from '../../services/mutations';
 import { getFormData } from '../../utils/form';
+import TopBarRegister from '../../components/TopBarRegister';
 
 export default function EditRegister() {
   const classes = useStyles();
@@ -32,10 +33,10 @@ export default function EditRegister() {
     history.push('/');
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     console.log('aqui')
     if (window.confirm('Tem certeza que deseja deletar este registro?')) {
-      delete_register({ variables: { id } }); // TO DO - try catch
+      await delete_register({ variables: { id } }); // TO DO - try catch
       history.push('/');
     } 
   };
@@ -43,15 +44,14 @@ export default function EditRegister() {
   return (
     <div className={classes.wrapper} >
       <form onSubmit={HandleSubmit} >
-        <Button>{' < '}</Button><h4>Edição do registro</h4>
+        <TopBarRegister to="/" text="Editar registro" />
         <FormRegister register={data?.kbRegister}/>
-        {loading 
-        ?
+        {loading ?
           <h4>salvando</h4>  
         : 
           <div className={classes.actionsContainer} >
-            <Button className={classes.editButton} onClick={() => handleDelete() }>Deletar</Button>
-            <Button className={classes.editButton} type='submit' >Atualizar</Button>
+            <Button variant="contained" className={classes.editButton} onClick={() => handleDelete() }>Deletar</Button>
+            <Button variant="contained" className={classes.editButton} type='submit' >Atualizar</Button>
           </div>}
         {error && <h4>`Erro ao salvar ${error}`</h4>}
       </form>

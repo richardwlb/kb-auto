@@ -4,14 +4,15 @@ import { Theme, createStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapper: {
-      marginLeft: '0rem',
+      // marginLeft: '0rem',
+      height: '100%',
     },
     editButton: {
-      // minWidth: '90px',
+      backgroundColor: theme.palette.background.default,
       margin: '5px',
       width: '50vw',
       '@media (min-width: 800px)': {
-        maxWidth: '250px'
+        maxWidth: '150px'
       }
     },
     actionsContainer: {
@@ -19,7 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: '1.5rem',
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'flex-end'
+      justifyContent: 'flex-end',
+      backgroundColor: theme.palette.primary.main,
     }
   })
 );
