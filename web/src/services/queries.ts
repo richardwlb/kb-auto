@@ -15,8 +15,8 @@ export const GET_REGISTER = gql`
 `;
 
 export const LIST_REGISTERS = gql`
-  query Registros {
-    kbRegisters{
+  query Registros($search: String){
+    kbRegisters(search: $search){
       id
       title
       car_brand

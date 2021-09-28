@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { SearchSharp, NoteAddSharp } from '@material-ui/icons';
 import ListRegisters from '../../components/ListRegisters';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,6 +57,7 @@ const BootsrapInput = withStyles((theme: Theme) =>
 
 export default function Home(){
   const classes = useStyles();
+  const [search, setSearch] = useState('');
 
   return(
     <div>
@@ -69,11 +71,11 @@ export default function Home(){
         </IconButton>
 
         <div className={classes.searchContainer} >
-          <BootsrapInput />
-          <SearchSharp 
+          <BootsrapInput value={search} onChange={(e) => setSearch(e.target.value)} />
+          {/* <SearchSharp 
             className={classes.searchIcon}
             onClick={() => alert('procurar')} 
-          />
+          /> */}
         </div>
 
         <div className="classes actionsContainer">
@@ -84,7 +86,7 @@ export default function Home(){
           
        </Toolbar>
       </AppBar>
-      <ListRegisters />
+      <ListRegisters search={search} />
     </div>
   );
 }

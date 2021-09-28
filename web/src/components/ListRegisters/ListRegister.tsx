@@ -6,14 +6,21 @@ import { Waypoint } from "react-waypoint";
 import { LIST_REGISTERS, SOME_REGISTERS } from '../../services/queries';
 import RegisterCard from "../RegisterCard";
 
-export default function ListRegisters() {
+interface ListRegistersProps {
+  search: string;
+}
+
+export default function ListRegisters( props: ListRegistersProps ) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, loading, error } = useQuery(LIST_REGISTERS, {
     onError: (error) => console.log("Error to load data", error),
     onCompleted: (res) => {
       console.log('Result:',res)
     },
-    fetchPolicy: 'no-cache'
+    fetchPolicy: 'no-cache',
+    variables: {
+      search: props.search
+    }
     // variables: {
     //   offset: 0,
     //   limit: 2
@@ -63,7 +70,7 @@ export default function ListRegisters() {
   if (error) return (<>{`Error! ${error.message}`}</>);
 
   // Very important, do not use loading, because it will load the entire list again.
-  if (loading) return (<>Loading...</>);
+  if (loading) return (<CircularProgress />);
   // if (!data) {
   //   return <CircularProgress />;
   // }
