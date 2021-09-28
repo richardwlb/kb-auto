@@ -1,8 +1,19 @@
 const db = require('../models');
+const { Op } = require('sequelize');
 
 const resolvers = {
   Query: {
-    kbRegisters: async ( parent, args, { models }) => db.KbRegisters.findAll(),
+    kbRegisters: async ( parent, args, { models }) => {
+      return db.KbRegisters.findAll({
+        where: {
+          [Op.or]: [
+            { title: { [Op.like]: `%${args.search}%` } },
+            { desc_problem: { [Op.like]: `%${args.search}%` } },
+            { desc_solution: { [Op.like]: `%${args.search}%` } }
+          ]
+        }
+      });
+    },
     someKbRegisters: async ( parent, { limit, offset }, { models }) => db.KbRegisters.findAll({ limit, offset }),
     kbRegister: async (obj, args, context, info) => 
       await db.KbRegisters.findByPk(args.id)    

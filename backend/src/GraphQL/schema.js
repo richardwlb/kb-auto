@@ -2,7 +2,7 @@ const  { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Query {
-    kbRegisters: [KbRegister]
+    kbRegisters(search: String): [KbRegister]
     kbRegister(id: ID!): KbRegister
     someKbRegisters(limit: Int!, offset: Int!): [KbRegister]
   }
